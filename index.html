@@ -42,6 +42,8 @@
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            margin-top: 20px;
+            display: none;
         }
         
         .btn:hover {
@@ -86,17 +88,66 @@
                 transform: translateY(-20px);
             }
         }
+        
+        .question-box {
+            margin: 20px 0;
+        }
+        
+        input {
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            width: 200px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+        }
+        
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 24px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="envelope">🎁</div>
         <h1>Selamat Hari Raya Idul Fitri</h1>
+        
+        <div class="question-box">
+            <p>Siapa Nama Aseli MofuMofu? 😹</p>
+            <input type="text" id="answerInput" placeholder="Ketik jawaban disini">
+            <div class="message" id="message"></div>
+        </div>
+        
         <button class="btn" id="thrBtn">Minal Aidzin Walfaidzin Semuanya🙏</button>
     </div>
 
     <script>
-        document.getElementById('thrBtn').addEventListener('click', function() {
+        const answerInput = document.getElementById('answerInput');
+        const message = document.getElementById('message');
+        const thrBtn = document.getElementById('thrBtn');
+        
+        answerInput.addEventListener('input', function() {
+            const userAnswer = this.value.trim().toLowerCase();
+            const correctAnswers = ['abdul', 'adul'];
+            
+            if (correctAnswers.includes(userAnswer)) {
+                message.textContent = "Jawaban benar!";
+                message.style.color = "#4caf50";
+                thrBtn.style.display = "inline-block";
+            } else if (userAnswer.length > 0) {
+                message.textContent = "Jawaban salah, coba lagi!";
+                message.style.color = "#f44336";
+                thrBtn.style.display = "none";
+            } else {
+                message.textContent = "";
+                thrBtn.style.display = "none";
+            }
+        });
+        
+        thrBtn.addEventListener('click', function() {
             const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
             
             for (let i = 0; i < 100; i++) {
